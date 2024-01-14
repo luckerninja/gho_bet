@@ -11,10 +11,11 @@
   },
   "dependencies": {
     "@tanstack/react-query": "5.0.5",
+    "connectkit": "^1.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "viem": "2.0.0",
-    "wagmi": "2.0.1"
+    "viem": "^1.21.4",
+    "wagmi": "^1.4.13"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.1.2",
