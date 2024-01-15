@@ -1,34 +1,58 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.9;
 
-// Uncomment this line to use console.log
-// import "hardhat/console.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-contract Lock {
-    uint public unlockTime;
-    address payable public owner;
-
-    event Withdrawal(uint amount, uint when);
-
-    constructor(uint _unlockTime) payable {
-        require(
-            block.timestamp < _unlockTime,
-            "Unlock time should be in the future"
-        );
-
-        unlockTime = _unlockTime;
-        owner = payable(msg.sender);
+contract Prediction {
+    struct Bet {
+        address bettor;
+        uint amount;
+        bool outcome;
     }
 
-    function withdraw() public {
-        // Uncomment this line, and the import of "hardhat/console.sol", to print a log in your terminal
-        // console.log("Unlock time is %o and block timestamp is %o", unlockTime, block.timestamp);
+    IERC20 public ghoToken;
+    uint public predictionCount;
+    mapping(uint => Bet[]) public betsByPrediction;
 
-        require(block.timestamp >= unlockTime, "You can't withdraw yet");
-        require(msg.sender == owner, "You aren't the owner");
+    event PredictionMade(uint predictionId, address indexed bettor, uint amount);
+    event BetPlaced(uint predictionId, address indexed bettor, uint amount, bool outcome);
 
-        emit Withdrawal(address(this).balance, block.timestamp);
+    constructor(address _ghoToken) {
+        ghoToken = IERC20(_ghoToken);
+        predictionCount = 0;
+    }
 
-        owner.transfer(address(this).balance);
+    function makePrediction() external {
+        require(ghoToken.balanceOf(msg.sender) > 0, "Insufficient GHO balance to make a prediction");
+
+        uint predictionId = predictionCount;
+        predictionCount++;
+
+        betsByPrediction[predictionId].push(Bet({
+            bettor: msg.sender,
+            amount: 0, 
+            outcome: false 
+        }));
+
+        emit PredictionMade(predictionId, msg.sender, 0);
+    }
+
+    function getPrediction(uint predictionId) external view returns (Bet[] memory) {
+        return betsByPrediction[predictionId];
+    }
+
+    function betOnPrediction(uint predictionId, uint amount, bool outcome) external {
+        require(predictionId < predictionCount, "Prediction does not exist");
+        require(ghoToken.balanceOf(msg.sender) >= amount, "Insufficient GHO balance for the bet");
+
+        betsByPrediction[predictionId].push(Bet({
+            bettor: msg.sender,
+            amount: amount,
+            outcome: outcome
+        }));
+
+        ghoToken.transferFrom(msg.sender, address(this), amount);
+
+        emit BetPlaced(predictionId, msg.sender, amount, outcome);
     }
 }
