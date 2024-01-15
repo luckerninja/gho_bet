@@ -64,6 +64,10 @@ contract GhoBet {
         return predictions[predictionId];
     }
 
+    function getPredictions() external view returns (Prediction[] memory) {
+        return predictions;
+    }
+
     function betOnPrediction(uint predictionId, uint amount, bool outcome) external {
         require(predictionId < predictions.length, "Prediction does not exist");
         require(block.timestamp < predictions[predictionId].endDate, "Prediction has ended");
