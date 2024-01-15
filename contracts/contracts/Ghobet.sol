@@ -36,6 +36,7 @@ contract GhoBet {
 
     constructor(address _ghoToken) {
         ghoToken = IERC20(_ghoToken);
+        moderators[msg.sender] = true;
     }
 
     function addModerator(address newModerator) external onlyModerator {
