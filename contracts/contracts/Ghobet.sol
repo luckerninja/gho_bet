@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.9;
+pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-contract GhoBet {
+contract Ghobet {
     struct Bet {
         address bettor;
         uint amount;
@@ -16,7 +16,7 @@ contract GhoBet {
         uint endDate;
         uint totalFor;
         uint totalAgainst;
-        Bet[] bets;
+        uint predictionId; // Идентификатор предсказания
         bool resolved;
         bool result; // true for "for" winning, false for "against" winning
     }
@@ -24,6 +24,7 @@ contract GhoBet {
     IERC20 public ghoToken;
     Prediction[] public predictions;
     mapping(address => bool) public moderators;
+    mapping(uint => Bet[]) public betsMapping; // Отображение предсказания на ставки
 
     event PredictionMade(uint indexed predictionId, string text, uint betDate, uint endDate);
     event BetPlaced(uint indexed predictionId, address indexed bettor, uint amount, bool outcome);
@@ -52,7 +53,7 @@ contract GhoBet {
             endDate: endDate,
             totalFor: 0,
             totalAgainst: 0,
-            bets: new Bet[](0),
+            predictionId: predictionId,
             resolved: false,
             result: false
         }));
@@ -69,6 +70,11 @@ contract GhoBet {
         return predictions;
     }
 
+    function getBetsForPrediction(uint predictionId) external view returns (Bet[] memory) {
+        require(predictionId < predictions.length, "Prediction does not exist");
+        return betsMapping[predictionId];
+    }
+
     function betOnPrediction(uint predictionId, uint amount, bool outcome) external {
         require(predictionId < predictions.length, "Prediction does not exist");
         require(block.timestamp < predictions[predictionId].endDate, "Prediction has ended");
@@ -80,13 +86,10 @@ contract GhoBet {
             outcome: outcome
         });
 
-        predictions[predictionId].bets.push(newBet);
+        predictions[predictionId].totalFor += outcome ? amount : 0;
+        predictions[predictionId].totalAgainst += outcome ? 0 : amount;
 
-        if (outcome) {
-            predictions[predictionId].totalFor += amount;
-        } else {
-            predictions[predictionId].totalAgainst += amount;
-        }
+        betsMapping[predictionId].push(newBet);
 
         ghoToken.transferFrom(msg.sender, address(this), amount);
 
@@ -108,7 +111,7 @@ contract GhoBet {
         require(predictionId < predictions.length, "Prediction does not exist");
         require(predictions[predictionId].resolved, "Prediction is not yet resolved");
 
-        Bet[] storage bets = predictions[predictionId].bets;
+        Bet[] storage bets = betsMapping[predictionId];
 
         for (uint i = 0; i < bets.length; i++) {
             if (bets[i].outcome == predictions[predictionId].result) {
@@ -118,5 +121,8 @@ contract GhoBet {
                 ghoToken.transfer(bets[i].bettor, bets[i].amount + winnings);
             }
         }
+
+        // Clear the bets array for this prediction
+        delete betsMapping[predictionId];
     }
 }
