@@ -16,7 +16,7 @@ export default function GHOWidget() {
     })
     
     return(<>
-        <Button variant="outlined" sx={{backgroundColor: 'white', border: 0, color: 'black', '&:hover': {
+        <Button variant="outlined" sx={{backgroundColor: 'white', border: 0, color: 'black', borderRadius: '10px', '&:hover': {
            background:'white',
            border: 0,
         }}} startIcon={<GHOIcon />} >

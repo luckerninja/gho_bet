@@ -10,7 +10,7 @@ export default function Header() {
         backgroundColor: '#D8CDEC',
         margin: '0 auto',
         borderRadius: '10px',
-        width: '40%',
+        width: '35%',
         height: '60px',
         alignItems: 'center'
       }} px='5%'>
