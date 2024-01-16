@@ -1,5 +1,7 @@
-import { WagmiConfig, createConfig } from "wagmi";
+import { createConfig } from "wagmi";
 import { ConnectKitProvider, ConnectKitButton, getDefaultConfig } from "connectkit";
+
+import { goerli } from '@wagmi/core/chains'
 
 export const config = createConfig(
   getDefaultConfig({
@@ -8,6 +10,7 @@ export const config = createConfig(
     walletConnectProjectId: import.meta.env.VITE_WC_PROJECT_ID,
 
     appName: "ghobet",
+    chains: [goerli],
 
     // Optional
     appDescription: "Your App Description",

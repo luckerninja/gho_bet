@@ -15,9 +15,12 @@
     "@mui/material": "^5.15.4",
     "@tanstack/react-query": "5.0.5",
     "connectkit": "^1.6.0",
+    "ethers": "^6.10.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "viem": "^1.21.4",
+    "vite-plugin-svgr": "^4.2.0",
+    "vite-svg-loader": "^5.1.0",
     "wagmi": "^1.4.13"
   },
   "devDependencies": {

@@ -1,19 +1,21 @@
 import { ConnectKitButton } from 'connectkit'
 import { Box } from '@mui/material'
+import GHOWidget from './GHOWidget'
 
 export default function Header() {
     return (
       <Box sx={{
         display: 'flex',
-        'justifyContent': 'center',
+        justifyContent: 'space-between',
         backgroundColor: '#D8CDEC',
         margin: '0 auto',
         borderRadius: '10px',
-        width: '50%',
+        width: '40%',
         height: '60px',
         alignItems: 'center'
-      }} >
-          <ConnectKitButton />
+      }} px='5%'>
+            <GHOWidget />
+            <ConnectKitButton />
       </Box>
     )
   }
