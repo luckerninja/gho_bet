@@ -1,12 +1,9 @@
-import { useAccount, useConnect, useDisconnect } from 'wagmi'
-import { ConnectKitButton } from 'connectkit'
+import Header from "./components/Header"
 
 function App() {
   return (
     <>
-      <div>
-        <ConnectKitButton />
-      </div>
+      <Header />
     </>
   )
 }
