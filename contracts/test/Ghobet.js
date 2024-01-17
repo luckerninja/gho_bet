@@ -1,32 +1,32 @@
 const { expect } = require("chai");
 
-describe("Ghobet", function () {
-  let ghobet;
+describe("Ghoprd Contract Tests", function () {
+  let ghoprd;
   let ghoToken;
+  let accounts;
 
   before(async () => {
-    // Замените "GhoTokenAddress" на реальный адрес вашего токена GHO
-    const GhoTokenAddress = "0x..."; 
-
     const GhoToken = await ethers.getContractFactory("GhoToken");
     ghoToken = await GhoToken.deploy();
 
-    const Ghobet = await ethers.getContractFactory("Ghobet");
-    ghobet = await Ghobet.deploy(GhoTokenAddress);
+    const Ghoprd = await ethers.getContractFactory("Ghoprd");
+    ghoprd = await Ghoprd.deploy(ghoToken.address);
+
+    accounts = await ethers.getSigners();
   });
 
-  it("should create a prediction and retrieve it through view function", async function () {
+  it("should create a prediction and retrieve it", async function () {
     const predictionText = "Will it rain tomorrow?";
     const endDate = Math.floor(Date.now() / 1000) + 86400; // 1 day from now
 
-    // Создаем предсказание
-    await ghobet.makePrediction(predictionText, endDate);
+    // Create a prediction
+    await ghoprd.makePrediction(predictionText, endDate);
 
-    // Получаем созданное предсказание через view функцию
-    const predictions = await ghobet.getPredictions();
-    const retrievedPrediction = await ghobet.getPrediction(predictions.length - 1);
+    // Retrieve the created prediction using the view function
+    const predictions = await ghoprd.getPredictions();
+    const retrievedPrediction = predictions[predictions.length - 1];
 
-    // Проверяем, что созданное и полученное предсказание идентичны
+    // Check that the created and retrieved prediction are identical
     expect(retrievedPrediction.text).to.equal(predictionText);
     expect(retrievedPrediction.endDate).to.equal(endDate);
     expect(retrievedPrediction.totalFor).to.equal(0);
@@ -34,4 +34,7 @@ describe("Ghobet", function () {
     expect(retrievedPrediction.resolved).to.equal(false);
     expect(retrievedPrediction.result).to.equal(false);
   });
+
+  // Additional tests can be written here to cover other functionalities like
+  // placing bets, resolving predictions, claiming winnings, etc.
 });

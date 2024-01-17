@@ -76,23 +76,37 @@ contract Ghoprd {
     }
 
     function betOnPrediction(uint predictionId, uint amount, bool outcome) external {
+        // Check if the prediction exists
         require(predictionId < predictions.length, "Prediction does not exist");
+
+        // Check if the prediction has not ended
         require(block.timestamp < predictions[predictionId].endDate, "Prediction has ended");
+
+        // Check if the prediction is not already resolved
         require(!predictions[predictionId].resolved, "Prediction is already resolved");
 
+        // Check if the bet amount is greater than zero
+        require(amount > 0, "Amount must be greater than 0");
+
+        // Create a new bet
         Bet memory newBet = Bet({
             bettor: msg.sender,
             amount: amount,
             outcome: outcome
         });
 
+        // Update total bets for and against the prediction
         predictions[predictionId].totalFor += outcome ? amount : 0;
         predictions[predictionId].totalAgainst += outcome ? 0 : amount;
 
+        // Add the bet to the mapping of bets for the prediction
         betsMapping[predictionId].push(newBet);
 
-        ghoToken.transfer(address(this), amount);
+        // Transfer the tokens from the bettor to the contract
+        // The bettor should have called 'approve' for this contract before this action
+        require(ghoToken.transferFrom(msg.sender, address(this), amount), "Token transfer failed");
 
+        // Emit an event for bet placement
         emit BetPlaced(predictionId, msg.sender, amount, outcome);
     }
 
