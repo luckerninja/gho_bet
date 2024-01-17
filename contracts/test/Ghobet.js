@@ -8,9 +8,10 @@ describe("Ghoprd Contract Tests", function () {
   before(async () => {
     const GhoToken = await ethers.getContractFactory("GhoToken");
     ghoToken = await GhoToken.deploy();
-
     const Ghoprd = await ethers.getContractFactory("Ghoprd");
-    ghoprd = await Ghoprd.deploy(ghoToken.address);
+    ghoprd = await Ghoprd.deploy(ghoToken.target);
+
+    console.log(ghoprd, ghoToken)
 
     accounts = await ethers.getSigners();
   });
