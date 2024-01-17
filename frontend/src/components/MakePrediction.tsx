@@ -9,7 +9,7 @@ export default function MakePrediction() {
     const [name, setName] = useState("");
 
     const { data, isError, isLoading, write } = useContractWrite({
-        address: '0xAC3bf4092B4c73B3c69bA0FFAAc22B8272c83ea6',
+        address: '0x1B88a8fef304Ea9413D7224c4Bb878E119A5F329',
         abi: ghoprdAbi,
         functionName: 'makePrediction',
     })
