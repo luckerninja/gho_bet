@@ -1,451 +1,451 @@
 [
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "_ghoToken",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "constructor"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": true,
-          "internalType": "uint256",
-          "name": "predictionId",
-          "type": "uint256"
-        },
-        {
-          "indexed": true,
-          "internalType": "address",
-          "name": "bettor",
-          "type": "address"
-        },
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "amount",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
-          "internalType": "bool",
-          "name": "outcome",
-          "type": "bool"
-        }
-      ],
-      "name": "BetPlaced",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": true,
-          "internalType": "uint256",
-          "name": "predictionId",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
-          "internalType": "string",
-          "name": "text",
-          "type": "string"
-        },
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "betDate",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "endDate",
-          "type": "uint256"
-        }
-      ],
-      "name": "PredictionMade",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": true,
-          "internalType": "uint256",
-          "name": "predictionId",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
-          "internalType": "bool",
-          "name": "result",
-          "type": "bool"
-        }
-      ],
-      "name": "PredictionResolved",
-      "type": "event"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "newModerator",
-          "type": "address"
-        }
-      ],
-      "name": "addModerator",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "predictionId",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "amount",
-          "type": "uint256"
-        },
-        {
-          "internalType": "bool",
-          "name": "outcome",
-          "type": "bool"
-        }
-      ],
-      "name": "betOnPrediction",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "name": "betsMapping",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "bettor",
-          "type": "address"
-        },
-        {
-          "internalType": "uint256",
-          "name": "amount",
-          "type": "uint256"
-        },
-        {
-          "internalType": "bool",
-          "name": "outcome",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "predictionId",
-          "type": "uint256"
-        }
-      ],
-      "name": "claimWinnings",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "predictionId",
-          "type": "uint256"
-        }
-      ],
-      "name": "getBetsForPrediction",
-      "outputs": [
-        {
-          "components": [
-            {
-              "internalType": "address",
-              "name": "bettor",
-              "type": "address"
-            },
-            {
-              "internalType": "uint256",
-              "name": "amount",
-              "type": "uint256"
-            },
-            {
-              "internalType": "bool",
-              "name": "outcome",
-              "type": "bool"
-            }
-          ],
-          "internalType": "struct Ghoprd.Bet[]",
-          "name": "",
-          "type": "tuple[]"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "predictionId",
-          "type": "uint256"
-        }
-      ],
-      "name": "getPrediction",
-      "outputs": [
-        {
-          "components": [
-            {
-              "internalType": "string",
-              "name": "text",
-              "type": "string"
-            },
-            {
-              "internalType": "uint256",
-              "name": "betDate",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "endDate",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "totalFor",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "totalAgainst",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "predictionId",
-              "type": "uint256"
-            },
-            {
-              "internalType": "bool",
-              "name": "resolved",
-              "type": "bool"
-            },
-            {
-              "internalType": "bool",
-              "name": "result",
-              "type": "bool"
-            }
-          ],
-          "internalType": "struct Ghoprd.Prediction",
-          "name": "",
-          "type": "tuple"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "getPredictions",
-      "outputs": [
-        {
-          "components": [
-            {
-              "internalType": "string",
-              "name": "text",
-              "type": "string"
-            },
-            {
-              "internalType": "uint256",
-              "name": "betDate",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "endDate",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "totalFor",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "totalAgainst",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "predictionId",
-              "type": "uint256"
-            },
-            {
-              "internalType": "bool",
-              "name": "resolved",
-              "type": "bool"
-            },
-            {
-              "internalType": "bool",
-              "name": "result",
-              "type": "bool"
-            }
-          ],
-          "internalType": "struct Ghoprd.Prediction[]",
-          "name": "",
-          "type": "tuple[]"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "ghoToken",
-      "outputs": [
-        {
-          "internalType": "contract IERC20",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "string",
-          "name": "text",
-          "type": "string"
-        },
-        {
-          "internalType": "uint256",
-          "name": "endDate",
-          "type": "uint256"
-        }
-      ],
-      "name": "makePrediction",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "name": "moderators",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "name": "predictions",
-      "outputs": [
-        {
-          "internalType": "string",
-          "name": "text",
-          "type": "string"
-        },
-        {
-          "internalType": "uint256",
-          "name": "betDate",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "endDate",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "totalFor",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "totalAgainst",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "predictionId",
-          "type": "uint256"
-        },
-        {
-          "internalType": "bool",
-          "name": "resolved",
-          "type": "bool"
-        },
-        {
-          "internalType": "bool",
-          "name": "result",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "predictionId",
-          "type": "uint256"
-        },
-        {
-          "internalType": "bool",
-          "name": "result",
-          "type": "bool"
-        }
-      ],
-      "name": "resolvePrediction",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    }
-  ]
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_ghoToken",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "predictionId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "bettor",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "outcome",
+        "type": "bool"
+      }
+    ],
+    "name": "BetPlaced",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "predictionId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "text",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "betDate",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "endDate",
+        "type": "uint256"
+      }
+    ],
+    "name": "PredictionMade",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "predictionId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "result",
+        "type": "bool"
+      }
+    ],
+    "name": "PredictionResolved",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "newModerator",
+        "type": "address"
+      }
+    ],
+    "name": "addModerator",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "predictionId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "outcome",
+        "type": "bool"
+      }
+    ],
+    "name": "betOnPrediction",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "betsMapping",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "bettor",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "outcome",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "predictionId",
+        "type": "uint256"
+      }
+    ],
+    "name": "claimWinnings",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "predictionId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getBetsForPrediction",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "bettor",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "outcome",
+            "type": "bool"
+          }
+        ],
+        "internalType": "struct Ghoprd.Bet[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "predictionId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getPrediction",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "text",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "betDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "endDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "totalFor",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "totalAgainst",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "predictionId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "resolved",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "result",
+            "type": "bool"
+          }
+        ],
+        "internalType": "struct Ghoprd.Prediction",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getPredictions",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "text",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "betDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "endDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "totalFor",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "totalAgainst",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "predictionId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "resolved",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "result",
+            "type": "bool"
+          }
+        ],
+        "internalType": "struct Ghoprd.Prediction[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "ghoToken",
+    "outputs": [
+      {
+        "internalType": "contract IERC20",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "text",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "endDate",
+        "type": "uint256"
+      }
+    ],
+    "name": "makePrediction",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "moderators",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "predictions",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "text",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "betDate",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "endDate",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "totalFor",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "totalAgainst",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "predictionId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "resolved",
+        "type": "bool"
+      },
+      {
+        "internalType": "bool",
+        "name": "result",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "predictionId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "result",
+        "type": "bool"
+      }
+    ],
+    "name": "resolvePrediction",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
