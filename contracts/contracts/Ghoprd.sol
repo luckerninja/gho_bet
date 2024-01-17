@@ -91,7 +91,7 @@ contract Ghoprd {
 
         betsMapping[predictionId].push(newBet);
 
-        ghoToken.transferFrom(msg.sender, address(this), amount);
+        ghoToken.transfer(address(this), amount);
 
         emit BetPlaced(predictionId, msg.sender, amount, outcome);
     }
