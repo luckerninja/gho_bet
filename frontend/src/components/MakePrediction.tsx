@@ -1,12 +1,14 @@
 
 import ghoprdAbi from './abi/ghoprd.json'
 import { useContractWrite } from 'wagmi'
-import { Button, TextField, Box } from '@mui/material'
+import { Button, TextField, Box, Input } from '@mui/material'
 import { useState } from 'react'
 
 export default function MakePrediction() {
 
-    const [name, setName] = useState("");
+    const [text, setText] = useState("");
+    const [date, setDate] = useState("")
+    
 
     const { data, isError, isLoading, write } = useContractWrite({
         address: '0x1B88a8fef304Ea9413D7224c4Bb878E119A5F329',
@@ -17,12 +19,20 @@ export default function MakePrediction() {
     return(
     <Box sx={{margin: '40px auto', width: '45%'}}> 
         <TextField
-            value={name}
+            value={text}
             label="Your prediction"
             onChange={(e) => {
-                setName(e.target.value);
+                setText(e.target.value);
             }}
         /> 
-        <Button onClick={() => write({args: [name, 1709438758]})}>Make prediction</Button>
+        <Input 
+            type='date' 
+            value={date}
+            onChange={(e) => {
+                setDate(e.target.value);
+            }}
+            
+        />
+        <Button onClick={() => write({args: [text, new Date(date).getTime()]})}>Make prediction</Button>
     </Box>)
 }
