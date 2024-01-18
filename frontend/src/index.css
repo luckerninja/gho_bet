@@ -1,3 +1,8 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
 :root {
   background-color: #181818;
   color: rgba(255, 255, 255, 0.87);
@@ -22,6 +27,7 @@
 
 body {
   background-color: #D8CDEC;
+  min-height: 100vh;
 }
 
 .MuiLinearProgress-colorPrimary {
