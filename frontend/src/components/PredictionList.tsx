@@ -2,7 +2,7 @@
 import { useContractRead, useContractWrite } from 'wagmi'
 import ghoprdAbi from './abi/ghoprd.json'
 import ghoAbi from './abi/gho.json'
-import { Box, Button, Switch, Divider, Input, Typography, LinearProgress } from '@mui/material'
+import { Box, Button, Switch, Divider, Input, Typography, LinearProgress, Stack } from '@mui/material'
 
 export default function PredictionList() {
 
@@ -31,21 +31,35 @@ export default function PredictionList() {
     const predictions = data as any[]
     
     return(
-        <Box sx={{margin: '40px auto', width: '35%', backgroundColor: '#EBE3FA',  borderRadius: '40px'}}>
+        <Box sx={{margin: '40px auto', width: '35%', backgroundColor: '#EBE3FA',  borderRadius: '40px', padding: '50px 0'}} >
             {predictions && predictions.map((el) => {
                 return (
-                    <Box key={el?.predictionId} >
-                        {el.text}
-                        <Button sx={{ backgroundColor: '#A095B5', color: 'black', fontWeight: 'bold', borderRadius: '20px' }} onClick={async () => {
-                            await approveGHO({args: ['0x1B88a8fef304Ea9413D7224c4Bb878E119A5F329', 1 * WEI]});
-                            await betOnPrediction({args: [el?.predictionId, 1 * WEI, true]});
-                        }}>bet on prediction</Button>
-                        <Typography>{new Date(Number(el.endDate) * 1000).toISOString().slice(0, 10)}</Typography>
-                        <Switch />
-                        <Input value={0} type='number' sx={{ backgroundColor: '#F7F2FF', borderRadius: '20px', width: '55px', padding: '0 10px', '&:before': { borderBottom: '0px!important' } }} />
-                        <LinearProgress variant="determinate"  value={50} sx={{ borderRadius: '10px', height: '20px' }} />
-                        <Divider sx={{ height: '2px', backgroundColor: '#A095B5' }} />
-                    </Box>
+                    <>
+                        <Box key={el?.predictionId} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '20px 50px 20px 50px' }} >
+                            <Box width='30%' sx={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
+                                <Typography variant='h5'>{el.text}</Typography>
+                                <Box sx={{ display: 'flex', alignItems: 'center', width: '100%'}}>
+                                    <Typography>yes</Typography>
+                                    <LinearProgress variant="determinate"  value={50} sx={{ margin: '0 5px', width: '80%', borderRadius: '10px', height: '17px' }} />
+                                    <Typography>no</Typography>
+                                </Box>
+                            </Box>
+                            <Box width='30%' sx={{display: 'flex', justifyContent: 'center'}}>
+                                <Typography variant='h4' >{new Date(Number(el.endDate) * 1000).toISOString().slice(0, 10)}</Typography>
+                            </Box>
+                            <Box>
+                                <Input value={0} type='number' sx={{ backgroundColor: '#F7F2FF', borderRadius: '20px', width: '55px', padding: '0 10px', '&:before': { borderBottom: '0px!important' } }} />
+                                <Button sx={{ backgroundColor: '#A095B5', color: 'black', fontWeight: 'bold', borderRadius: '20px', margin: '0 10px' }} onClick={async () => {
+                                    await approveGHO({args: ['0x1B88a8fef304Ea9413D7224c4Bb878E119A5F329', 1 * WEI]});
+                                    await betOnPrediction({args: [el?.predictionId, 1 * WEI, true]});
+                                }}>bet on prediction</Button>
+                                <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }} >
+                                    no <Switch /> yes
+                                </Box>
+                            </Box>
+                        </Box>
+                        <Divider sx={{ height: '2px', backgroundColor: '#A095B5', width: '90%', margin: '0 auto' }} />
+                    </>
                 )
             })}
         </Box>
