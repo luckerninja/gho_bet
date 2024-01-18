@@ -23,3 +23,11 @@
 body {
   background-color: #D8CDEC;
 }
+
+.MuiLinearProgress-colorPrimary {
+  background-color: white!important;
+}
+
+.MuiLinearProgress-barColorPrimary {
+  background-color: #A095B5!important;
+}

@@ -33,7 +33,7 @@ export default function MakePrediction() {
         <Input 
             type='date' 
             value={date}
-            sx={{ margin: '10px', backgroundColor: '#E0D9EE', padding: '5px 20px', borderRadius: '20px', '&:before': { borderBottom: '0px!important' }  }}
+            sx={{ margin: '10px', backgroundColor: '#E0D9EE', padding: '5px 20px', borderRadius: '20px', '&:before': { borderBottom: '0px!important' } }}
             onChange={(e) => {
                 setDate(e.target.value);
             }}

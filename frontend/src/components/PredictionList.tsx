@@ -36,14 +36,14 @@ export default function PredictionList() {
                 return (
                     <Box key={el?.predictionId} >
                         {el.text}
-                        <Button onClick={async () => {
+                        <Button sx={{ backgroundColor: '#A095B5', color: 'black', fontWeight: 'bold', borderRadius: '20px' }} onClick={async () => {
                             await approveGHO({args: ['0x1B88a8fef304Ea9413D7224c4Bb878E119A5F329', 1 * WEI]});
                             await betOnPrediction({args: [el?.predictionId, 1 * WEI, true]});
-                        }}>Bet</Button>
+                        }}>bet on prediction</Button>
                         <Typography>{new Date(Number(el.endDate) * 1000).toISOString().slice(0, 10)}</Typography>
                         <Switch />
-                        <Input type='number' />
-                        <LinearProgress variant="determinate"  value={50} />
+                        <Input value={0} type='number' sx={{ backgroundColor: '#F7F2FF', borderRadius: '20px', width: '55px', padding: '0 10px', '&:before': { borderBottom: '0px!important' } }} />
+                        <LinearProgress variant="determinate"  value={50} sx={{ borderRadius: '10px', height: '20px' }} />
                         <Divider sx={{ height: '2px', backgroundColor: '#A095B5' }} />
                     </Box>
                 )
