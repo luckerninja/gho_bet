@@ -39,17 +39,17 @@ export default function PredictionList() {
             {predictions && predictions.map((el) => {
                 return (
                     <>
-                        <Box key={el?.predictionId} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '20px 50px 20px 50px' }} >
+                        <Box key={el?.predictionId} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', padding: '20px 50px 20px 50px' }} >
                             <Box width='30%' sx={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
                                 <Typography variant='h5'>{el.text}</Typography>
-                                <Box sx={{ display: 'flex', alignItems: 'center', width: '100%'}}>
+                                <Box sx={{ display: 'flex', alignItems: 'center', width: '100%', marginTop: '15px'}}>
                                     <Typography>yes</Typography>
                                     <LinearProgress variant="determinate"  value={50} sx={{ margin: '0 5px', width: '80%', borderRadius: '10px', height: '17px' }} />
                                     <Typography>no</Typography>
                                 </Box>
                             </Box>
                             <Box width='30%' sx={{ display: 'flex', justifyContent: 'center', fontWeight: 'bold' }}>
-                                <Typography variant='h4' >{new Date(Number(el.endDate) * 1000).toISOString().slice(0, 10)}</Typography>
+                                <Typography variant='h5' sx={{fontWeight: 'bold', fontSize: '28px'}}>{new Date(Number(el.endDate) * 1000).toISOString().slice(0, 10)}</Typography>
                             </Box>
                             <Box>
                                 <Input value={bet} onChange={(e) => { setBet(Number(e.target.value)); }}type='number' sx={{ backgroundColor: '#F7F2FF', borderRadius: '20px', width: '55px', padding: '0 10px', '&:before': { borderBottom: '0px!important' } }} />

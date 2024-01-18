@@ -31,3 +31,15 @@ body {
 .MuiLinearProgress-barColorPrimary {
   background-color: #A095B5!important;
 }
+
+.MuiSwitch-colorPrimary {
+  background-color: #A095B5;
+}
+
+.Mui-checked {
+  color: #A095B5!important;
+}
+
+.MuiSwitch-track {
+  background-color: white!important;
+}
