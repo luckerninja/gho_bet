@@ -5,6 +5,7 @@ import { ethers } from 'ethers';
 import { BigNumberish } from 'ethers';
 import { Button } from '@mui/material';
 import GHOIcon from './icons/gho.svg?react'
+import { watchPendingTransactions } from 'wagmi/actions';
 
 export default function GHOWidget() {
 

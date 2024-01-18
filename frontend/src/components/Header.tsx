@@ -1,6 +1,7 @@
 import { ConnectKitButton } from 'connectkit'
 import { Box } from '@mui/material'
 import GHOWidget from './GHOWidget'
+import Logo from './icons/logo.svg?react'
 
 export default function Header() {
     return (
@@ -14,6 +15,7 @@ export default function Header() {
         height: '60px',
         alignItems: 'center'
       }} px='5%'>
+            <Logo style={{height: '70%'}} />
             <GHOWidget />
             <ConnectKitButton />
       </Box>
