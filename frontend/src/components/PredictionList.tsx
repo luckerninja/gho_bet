@@ -3,8 +3,12 @@ import { useContractRead, useContractWrite } from 'wagmi'
 import ghoprdAbi from './abi/ghoprd.json'
 import ghoAbi from './abi/gho.json'
 import { Box, Button, Switch, Divider, Input, Typography, LinearProgress, Stack } from '@mui/material'
+import { useState } from 'react'
 
 export default function PredictionList() {
+
+    const [outcome, setOutcome] = useState(false);
+    const [bet, setBet] = useState(0);
 
     const WEI = 1000000000000000000;
 
@@ -44,17 +48,17 @@ export default function PredictionList() {
                                     <Typography>no</Typography>
                                 </Box>
                             </Box>
-                            <Box width='30%' sx={{display: 'flex', justifyContent: 'center'}}>
+                            <Box width='30%' sx={{ display: 'flex', justifyContent: 'center', fontWeight: 'bold' }}>
                                 <Typography variant='h4' >{new Date(Number(el.endDate) * 1000).toISOString().slice(0, 10)}</Typography>
                             </Box>
                             <Box>
-                                <Input value={0} type='number' sx={{ backgroundColor: '#F7F2FF', borderRadius: '20px', width: '55px', padding: '0 10px', '&:before': { borderBottom: '0px!important' } }} />
+                                <Input value={bet} onChange={(e) => { setBet(Number(e.target.value)); }}type='number' sx={{ backgroundColor: '#F7F2FF', borderRadius: '20px', width: '55px', padding: '0 10px', '&:before': { borderBottom: '0px!important' } }} />
                                 <Button sx={{ backgroundColor: '#A095B5', color: 'black', fontWeight: 'bold', borderRadius: '20px', margin: '0 10px' }} onClick={async () => {
-                                    await approveGHO({args: ['0x1B88a8fef304Ea9413D7224c4Bb878E119A5F329', 1 * WEI]});
-                                    await betOnPrediction({args: [el?.predictionId, 1 * WEI, true]});
+                                    await approveGHO({args: ['0x1B88a8fef304Ea9413D7224c4Bb878E119A5F329', bet * WEI]});
+                                    await betOnPrediction({args: [el?.predictionId, bet * WEI, outcome]});
                                 }}>bet on prediction</Button>
                                 <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }} >
-                                    no <Switch /> yes
+                                    no <Switch checked={outcome} onClick={() => { setOutcome(!outcome); }} /> yes
                                 </Box>
                             </Box>
                         </Box>
