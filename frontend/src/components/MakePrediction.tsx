@@ -17,10 +17,15 @@ export default function MakePrediction() {
     })
     
     return(
-    <Box sx={{margin: '40px auto', width: '45%'}}> 
+    <Box sx={{margin: '40px auto', width: '35%', backgroundColor: '#A095B5', borderRadius: '40px', display: 'flex', justifyContent: 'center', flexWrap: 'wrap', padding: '10px' }}> 
         <TextField
             value={text}
+            InputProps={{
+                disableUnderline: true
+            }}
+            variant='standard'
             label="Your prediction"
+            sx={{ width: '99%', backgroundColor: '#F7F2FF', borderRadius: '40px', outline: 'none!important', padding: '10px'}}
             onChange={(e) => {
                 setText(e.target.value);
             }}
@@ -28,11 +33,12 @@ export default function MakePrediction() {
         <Input 
             type='date' 
             value={date}
+            sx={{ margin: '10px', backgroundColor: '#E0D9EE', padding: '5px 20px', borderRadius: '20px', '&:before': { borderBottom: '0px!important' }  }}
             onChange={(e) => {
                 setDate(e.target.value);
             }}
             
         />
-        <Button onClick={() => write({args: [text, new Date(date).getTime()]})}>Make prediction</Button>
+        <Button sx={{ margin: '10px', backgroundColor: '#E0D9EE', color: '#333333', padding: '5px 20px', borderRadius: '20px', '&:hover': { backgroundColor: '#E0D9EE' } }} onClick={() => write({args: [text, new Date(date).getTime()]})}>Make prediction</Button>
     </Box>)
 }
