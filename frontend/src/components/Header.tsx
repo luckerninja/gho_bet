@@ -16,8 +16,10 @@ export default function Header() {
         alignItems: 'center'
       }} px='5%'>
             <Logo style={{height: '70%'}} />
-            <GHOWidget />
-            <ConnectKitButton />
+            <Box sx={{width: '30%', display: 'flex', justifyContent: 'space-between'}}>
+              <GHOWidget />
+              <ConnectKitButton />
+            </Box>
       </Box>
     )
   }

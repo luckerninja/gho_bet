@@ -17,8 +17,8 @@ export default function GHOWidget() {
     })
     
     return(<>
-        <Button variant="outlined" sx={{backgroundColor: 'white', border: 0, color: 'black', borderRadius: '10px', '&:hover': {
-           background:'white',
+        <Button variant="outlined" sx={{backgroundColor: 'none', border: 0, fontWeight: 'bold', color: '#4B4B4B', borderRadius: '10px', '&:hover': {
+           background:'none',
            border: 0,
         }}} startIcon={<GHOIcon />} >
             {ethers.formatEther(data as BigNumberish)}
