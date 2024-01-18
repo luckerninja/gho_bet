@@ -18,7 +18,10 @@ export default function Header() {
             <Logo style={{height: '70%'}} />
             <Box sx={{width: '30%', display: 'flex', justifyContent: 'space-between'}}>
               <GHOWidget />
-              <ConnectKitButton />
+              <ConnectKitButton customTheme={{
+                "--ck-connectbutton-background": "#A095B5",
+                "--ck-connectbutton-border-radius": "20px"
+              }}/>
             </Box>
       </Box>
     )

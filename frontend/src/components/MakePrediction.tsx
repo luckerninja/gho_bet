@@ -25,7 +25,7 @@ export default function MakePrediction() {
             }}
             variant='standard'
             label="Your prediction"
-            sx={{ width: '99%', backgroundColor: '#F7F2FF', borderRadius: '40px', outline: 'none!important', padding: '10px'}}
+            sx={{ width: '99%', backgroundColor: '#F7F2FF', borderRadius: '40px', outline: 'none!important', padding: '10px', 'label': { 'left': '50px' }}}
             onChange={(e) => {
                 setText(e.target.value);
             }}
