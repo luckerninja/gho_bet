@@ -37,7 +37,7 @@ export default function PredictionList() {
     return(
         <Box sx={{margin: '40px auto', width: '35%', backgroundColor: '#EBE3FA',  borderRadius: '40px', padding: '50px 0'}} >
             {predictions && predictions.map((el) => {
-                const procents = (Number(el.totalAgainst)) /  (Number(el.totalFor) + (Number(el.totalAgainst))) * 100
+                const procents = Number(el.totalFor) || Number(el.totalAgainst) ? (Number(el.totalAgainst)) /  (Number(el.totalFor) + (Number(el.totalAgainst))) * 100 : 50;
 
                 return (
                     <>

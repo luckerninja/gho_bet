@@ -39,6 +39,6 @@ export default function MakePrediction() {
             }}
             
         />
-        <Button sx={{ margin: '10px', backgroundColor: '#E0D9EE', color: '#333333', padding: '5px 20px', borderRadius: '20px', '&:hover': { backgroundColor: '#E0D9EE' } }} onClick={() => write({args: [text, new Date(date).getTime()]})}>Make prediction</Button>
+        <Button sx={{ margin: '10px', backgroundColor: '#E0D9EE', color: '#333333', padding: '5px 20px', borderRadius: '20px', '&:hover': { backgroundColor: '#E0D9EE' } }} onClick={() => write({args: [text, new Date(date).getTime() / 1000]})}>Make prediction</Button>
     </Box>)
 }
