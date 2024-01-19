@@ -11,7 +11,7 @@ export default function MakePrediction() {
     
 
     const { data, isError, isLoading, write } = useContractWrite({
-        address: '0x1B88a8fef304Ea9413D7224c4Bb878E119A5F329',
+        address: '0xC7D34E0e070aB6FC06B0f81eAcA0F0E6913b7341',
         abi: ghoprdAbi,
         functionName: 'makePrediction',
     })
