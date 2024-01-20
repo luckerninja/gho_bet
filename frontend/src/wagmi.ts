@@ -1,5 +1,5 @@
 import { createConfig } from "wagmi";
-import { ConnectKitProvider, ConnectKitButton, getDefaultConfig } from "connectkit";
+import { getDefaultConfig } from "connectkit";
 
 import { goerli } from '@wagmi/core/chains'
 

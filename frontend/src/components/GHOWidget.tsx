@@ -10,7 +10,7 @@ export default function GHOWidget() {
 
     const { address } = useAccount()
 
-    const { data, isError, isLoading } = useContractRead({
+    const { data } = useContractRead({
         address: '0xcbE9771eD31e761b744D3cB9eF78A1f32DD99211',
         abi: ghoAbi,
         functionName: 'balanceOf',

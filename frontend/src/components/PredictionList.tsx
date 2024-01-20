@@ -2,7 +2,7 @@
 import { useContractRead, useContractWrite } from 'wagmi'
 import ghoprdAbi from './abi/ghoprd.json'
 import ghoAbi from './abi/gho.json'
-import { Box, Button, Switch, Divider, Input, Typography, LinearProgress, Stack } from '@mui/material'
+import { Box, Button, Switch, Divider, Input, Typography, LinearProgress } from '@mui/material'
 import { useState } from 'react'
 
 export default function PredictionList() {
@@ -12,7 +12,7 @@ export default function PredictionList() {
 
     const WEI = 1000000000000000000;
 
-    const { data, isError, isLoading } = useContractRead({
+    const { data } = useContractRead({
         address: '0xC7D34E0e070aB6FC06B0f81eAcA0F0E6913b7341',
         abi: ghoprdAbi,
         functionName: 'getPredictions',
@@ -56,7 +56,7 @@ export default function PredictionList() {
                             <Box>
                                 <Input value={bet} onChange={(e) => { setBet(Number(e.target.value)); }}type='number' sx={{ backgroundColor: '#F7F2FF', borderRadius: '20px', width: '55px', padding: '0 10px', '&:before': { borderBottom: '0px!important' } }} />
                                 <Button sx={{ backgroundColor: '#A095B5', color: 'black', fontWeight: 'bold', borderRadius: '20px', margin: '0 10px' }} onClick={async () => {
-                                    // await approveGHO({args: ['0xC7D34E0e070aB6FC06B0f81eAcA0F0E6913b7341', bet * WEI]});
+                                    await approveGHO({args: ['0xC7D34E0e070aB6FC06B0f81eAcA0F0E6913b7341', bet * WEI]});
                                     await betOnPrediction({args: [el?.predictionId, bet * WEI, outcome]});
                                 }}>bet on prediction</Button>
                                 <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }} >
