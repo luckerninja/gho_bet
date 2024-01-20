@@ -22,4 +22,4 @@ Simple dapp that allow to make strong predictions from any message using GHO for
   
 - Composed a decentralized DB of all predictions.  
   
-- Created a DAO for evEnt outcome decisions.
+- Created a DAO for event outcome decisions.
