@@ -1,19 +1,20 @@
 
-import { useContractRead } from 'wagmi'
+import { useContractRead, useAccount } from 'wagmi'
 import ghoAbi from './abi/gho.json'
 import { ethers } from 'ethers';
 import { BigNumberish } from 'ethers';
 import { Button } from '@mui/material';
 import GHOIcon from './icons/gho.svg?react'
-import { watchPendingTransactions } from 'wagmi/actions';
 
 export default function GHOWidget() {
+
+    const { address } = useAccount()
 
     const { data, isError, isLoading } = useContractRead({
         address: '0xcbE9771eD31e761b744D3cB9eF78A1f32DD99211',
         abi: ghoAbi,
         functionName: 'balanceOf',
-        args: ['0xDD6BFbe9EC414FFABBcc80BB88378c0684e2Ad9c']
+        args: [address]
     })
     
     return(<>
@@ -21,7 +22,7 @@ export default function GHOWidget() {
            background:'none',
            border: 0,
         }}} startIcon={<GHOIcon />} >
-            {ethers.formatEther(data as BigNumberish)}
+            {data ? ethers.formatEther(data as BigNumberish) : 0}
         </Button>
     </>)
 }
