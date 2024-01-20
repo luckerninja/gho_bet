@@ -17,7 +17,7 @@ export default function MakePrediction() {
     })
     
     return(
-    <Box sx={{margin: '40px auto', width: '35%', backgroundColor: '#A095B5', borderRadius: '40px', display: 'flex', justifyContent: 'center', flexWrap: 'wrap', padding: '10px' }}> 
+    <Box sx={{margin: '40px auto', width: '50%', backgroundColor: '#A095B5', borderRadius: '40px', display: 'flex', justifyContent: 'center', flexWrap: 'wrap', padding: '10px' }}> 
         <TextField
             value={text}
             InputProps={{

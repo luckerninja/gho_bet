@@ -11,12 +11,12 @@ export default function Header() {
         backgroundColor: '#D8CDEC',
         margin: '0 auto',
         borderRadius: '10px',
-        width: '35%',
+        width: '55%',
         height: '60px',
         alignItems: 'center'
       }} px='5%'>
             <Logo style={{height: '70%'}} />
-            <Box sx={{width: '30%', display: 'flex', justifyContent: 'space-between'}}>
+            <Box sx={{width: '25%', display: 'flex', justifyContent: 'space-between'}}>
               <GHOWidget />
               <ConnectKitButton customTheme={{
                 "--ck-connectbutton-background": "#A095B5",
